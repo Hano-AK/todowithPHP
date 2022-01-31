@@ -4,7 +4,7 @@ include_once("Todo.php");
 if (isset($_POST['next'])){
     extract($_POST);
     $Todo = new Todo;
-     $Todo->addNew($description);
+     $Todo->ajouterTodo($description);
   
 
 
@@ -39,13 +39,16 @@ if (isset($_POST['next'])){
                 <?php
 
                 $Todo=new Todo;
-                $Todo->ajouter();
+                $Todo->afficherTodo();
                 if (isset($_GET['p'])){
 
                      $Todo = new Todo;
-                     $Todo->supprimer();
+                     $Todo->supprimerTodo();
                 
                 
+                }
+                else{
+                    echo 'no';
                 }
                 
 

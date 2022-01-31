@@ -29,7 +29,7 @@ class Todo
     {
         return $this->etat;
     }
-    public function addNew($descripton)
+    public function ajouterTodo($descripton)
     {
         require('bdd.php');
         Todo::setDesc($descripton);
@@ -37,7 +37,7 @@ class Todo
         $req->execute([$this->descripton, 1]);
         echo 'reussi';
     }
-    public function ajouter()
+    public function afficherTodo()
     {
         require('bdd.php');
         $req = $connexion->prepare('SELECT `id`, `descr`, `etat` FROM `todo`');
@@ -59,15 +59,15 @@ class Todo
 
         }
     }
-    public function supprimer(){
+    public function supprimerTodo(){
    
         require('bdd.php');
         
         if (isset($_GET['p'])){
             $id = $_GET['p'];
-            $req = $connexion->prepare("DELETE FROM `todo` WHERE id=?");
-            $req->execute(array($id));
-            echo'reussi';
+            $req = $connexion->prepare("DELETE FROM `todo` WHERE id = \"$id\"");
+            $req->execute();
+          
 
         }
         else{
