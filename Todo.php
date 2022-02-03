@@ -1,5 +1,4 @@
 <?php
-
 class Todo
 {
     private $id;
@@ -34,46 +33,63 @@ class Todo
         require('bdd.php');
         Todo::setDesc($descripton);
         $req = $connexion->prepare('INSERT INTO `todo`( `descr`, `etat`) VALUES (?,?)');
-        $req->execute([$this->descripton, 1]);
+        $req->execute([ $this->descripton, 1]);
         echo 'reussi';
     }
     public function afficherTodo()
     {
         require('bdd.php');
+      
         $req = $connexion->prepare('SELECT `id`, `descr`, `etat` FROM `todo`');
         $req->execute();
         while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
-            ?>
-        
-            <div >
-             <form action="" method="post" class='todolist'>
-            <span name='id'><?php echo $row['id'] ?></span> 
-            <span><?php echo $row['descr'] ?></span>
-            <a class='li'href='index.php?p=<?php echo $row['id'] ?>'><button class="delete"  >Delete</button> </a>
-           
-            
-            </form>
-             </div>
-             
+?>
+
+            <div>
+                <form action="" method="post" class='todolist'>
+                    <span name='id'><?php echo $row['id'] ?></span>
+                    <span><?php echo $row['descr'] ?></span>
+                    <div class="lienP"> <a class='li' href='index.php?p=<?php echo $row['id'] ?>'>delete </a>
+                    <a class='li' href='editbtn.php?A=<?php echo $row['id']?>'>update </a>
+                
+                
+                </div>
+
+
+
+
+                </form>
+            </div>
+
 <?php
 
         }
     }
-    public function supprimerTodo(){
-   
+    public function supprimerTodo()
+    {
         require('bdd.php');
-        
-        if (isset($_GET['p'])){
+        if (isset($_GET['p'])) {
             $id = $_GET['p'];
-            $req = $connexion->prepare("DELETE FROM `todo` WHERE id = \"$id\"");
+            $req = $connexion->prepare("DELETE FROM `todo` WHERE id = $id");
             $req->execute();
-          
-
-        }
-        else{
+        } else {
             echo 'no';
         }
-        
     }
+   public function update($title){
+    require('bdd.php');
+     if (isset($_GET['A'])) {
+        $iD=$_GET['A'];
+        $req=$connexion->prepare("UPDATE todo SET descr = ? WHERE id =  ?");
+        $req->execute(array($title, $iD));
+     }
+     else{
+         echo 'no';
+     }
+
+
     
+
+   }
 }
+

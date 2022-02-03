@@ -10,12 +10,20 @@ if (isset($_POST['next'])){
 
 
 }
+if (isset($_GET['p'])){
+
+$Todo = new Todo;
+$Todo->supprimerTodo();
+
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
@@ -40,16 +48,8 @@ if (isset($_POST['next'])){
 
                 $Todo=new Todo;
                 $Todo->afficherTodo();
-                if (isset($_GET['p'])){
-
-                     $Todo = new Todo;
-                     $Todo->supprimerTodo();
-                
-                
-                }
-                else{
-                    echo 'no';
-                }
+               
+               
                 
 
                
@@ -64,16 +64,7 @@ if (isset($_POST['next'])){
         </div>
 
     </div>
-    <div class="modal-bg">
-        <div class="modal">
-
-            <input type="text" class="finput" placeholder="Modifier votre Todo">
-            <button type="submit" class="savebtn">Save</button>
-            <span class="fermer "><img src="images/images.png " alt="closeBtn " srcset=" ">
-            </span>
-        </div>
-    </div>
-
+   
 
     <script src="server.js"></script>
 </body>
